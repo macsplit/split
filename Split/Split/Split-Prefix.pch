@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Split' target in the 'Split' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
