@@ -87,6 +87,6 @@ Usage: Joining Files back Together
 Known Issues
 ------------
 
-Will attempt to use all system resources to complete the operation as quickly as possible,
-potentially slowing other applications, particularly on systems with an HDD.
+- Will attempt to use all system resources to complete quickly, potentially slowing other applications, particularly on systems with an HDD.
 
+- On the latest macOS, the current build does not render and refresh the progress indicator, although the operation completes successfully.
