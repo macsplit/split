@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <dispatch/dispatch.h>
 
 @interface AppDelegate : NSObject <NSApplicationDelegate> {
     int pieces;
@@ -27,6 +28,7 @@
     IBOutlet NSTextField *placeholder;
     IBOutlet NSProgressIndicator *progressBar;
     IBOutlet NSTextField *chunkfield;
+    dispatch_queue_t DispatchQueue;
     
     BOOL inputEnabled;
     BOOL inputEnabled2;

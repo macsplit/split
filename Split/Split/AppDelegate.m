@@ -9,15 +9,22 @@
 #include <stdio.h>
 #import "AppDelegate.h"
 #import "DataSource.h"
+#import <dispatch/dispatch.h>
 
 @implementation AppDelegate
+
+- (void) display {
+    dispatch_async(DispatchQueue,^{
+        [progress display];
+    });
+}
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
     [self setChunkSize: @""];
     sourceSize = 0;
-    
+    DispatchQueue = dispatch_get_main_queue();
 }
 
 -(void) closeWindow: (NSNotification *)note {
@@ -127,6 +134,8 @@
 - (IBAction) split:(id)sender {
     [self setInputEnabled:NO];
     [self setInputEnabled2:NO];
+    [NSApp beginSheet:progress modalForWindow:splitWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
+    
     
     thread = [[NSThread alloc] initWithTarget:self selector:@selector(doSplit) object:nil];
     //NSLog(@"%f",[thread threadPriority]);
@@ -138,6 +147,7 @@
 - (IBAction) join:(id)sender {
     [self setInputEnabled2:NO];
     [self setInputEnabled:NO];
+    [NSApp beginSheet:progress modalForWindow:joinWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
     
     thread = [[NSThread alloc] initWithTarget:self selector:@selector(doJoin) object:nil];
     //[thread setThreadPriority:0.9];
@@ -183,7 +193,6 @@
 }
 
 -(void)doJoin {
-    [NSApp beginSheet:progress modalForWindow:joinWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
     
     unsigned long long bytestoread = 1024*1024;
     Source2 = [((DataSource*)[src2 dataSource]) getFiles];
@@ -225,8 +234,9 @@
                     //[NSThread sleepForTimeInterval: 0.001];
                     
                 double prog = (double)((bytesthathavebeenread*100)/totalsize);
-                [progressBar setDoubleValue:prog];
-                
+                    dispatch_async(DispatchQueue,^{
+                        [progressBar setDoubleValue:prog];
+                    });
                 if ([thread isCancelled]) {
                     [progress orderOut:nil];
                     [NSApp endSheet:progress];
@@ -247,11 +257,11 @@
     [self setInputEnabled:YES];
     [progress orderOut:nil];
     [NSApp endSheet:progress];
+    
 }
 
 -(void)doSplit {
     
-    [NSApp beginSheet:progress modalForWindow:splitWindow modalDelegate:self didEndSelector:NULL contextInfo:nil];
     
     Source = [src stringValue];
     Destination = [dst stringValue];
@@ -317,7 +327,9 @@
             //[NSThread sleepForTimeInterval: 0.001];
             
         double prog = (double)((bytesreadtotal*100)/size);
-        [progressBar setDoubleValue: prog];
+                dispatch_async(DispatchQueue,^{
+                    [progressBar setDoubleValue:prog];
+                });
             if ([thread isCancelled]) {
                 [progress orderOut:nil];
                 [NSApp endSheet:progress];
@@ -340,6 +352,7 @@
     [NSApp endSheet:progress];
     [self setInputEnabled:YES];
     [self setInputEnabled2:YES];
+    
 }
 
 @end

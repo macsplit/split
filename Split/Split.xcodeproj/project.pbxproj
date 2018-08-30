@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD0E741721377D3600B3082D /* libdispatch.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libdispatch.tbd; path = usr/lib/system/libdispatch.tbd; sourceTree = SDKROOT; };
 		AD6BBAE315BB486E00DC72B8 /* FileTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileTableView.h; sourceTree = "<group>"; };
 		AD6BBAE415BB486E00DC72B8 /* FileTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileTableView.m; sourceTree = "<group>"; };
 		AD6BBAE715BB53A800DC72B8 /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = ../DataSource.h; sourceTree = "<group>"; };
@@ -113,6 +114,7 @@
 		ADCD97E515B8D2250049F0F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD0E741721377D3600B3082D /* libdispatch.tbd */,
 				ADCD97E615B8D2250049F0F7 /* Cocoa.framework */,
 				ADCD980415B8D2260049F0F7 /* SenTestingKit.framework */,
 				ADCD97E815B8D2250049F0F7 /* Other Frameworks */,
@@ -232,7 +234,7 @@
 				ORGANIZATIONNAME = "Lee Hanken";
 				TargetAttributes = {
 					ADCD97E115B8D2250049F0F7 = {
-						DevelopmentTeam = PNJ9AX7795;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -415,14 +417,21 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Split/Split.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Split/Split-Prefix.pch";
 				INFOPLIST_FILE = "Split/Split-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -432,14 +441,21 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = Split/Split.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Split/Split-Prefix.pch";
 				INFOPLIST_FILE = "Split/Split-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
